@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Inventory Managmnet App</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Delays</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">Delays</div>
+            <div class="card-body">
+                <div class="card mb-4">
+                    <div class="card-header">New Delay</div>
+                    <div class="card-body">
+                        <form action="/delays/" method="POST" id="delay_form">
+                            <label for="reason" class="col-form-label">Reason</label>
+                            <input type="text" name="reason" id="reason">
+                            <label for="hours" class="col-form-label">Hours</label>
+                            <input type="number" name="hours" id="hours" min="0" step="1">
+                            <label for="date" class="col-form-label">Date</label>
+                            <input type="date" name="date" id="date">
+                            <label for="worker" class="col-form-label">Worker</label>
+                            <input type="text" name="worker" id="worker">
+                            <input id="submitDelay" value="Add Delay" class="btn btn-primary">
+
+                        </form>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        Delays Table
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            {% if delays|length < 1 %} <h4>There are no Delays, add one above</h4>
+                                {% else %}
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Reason</th>
+                                            <th>Hours</th>
+                                            <th>Worker</th>
+                                            <th>Delay ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Reason</th>
+                                            <th>Hours</th>
+                                            <th>Worker</th>
+                                            <th>Delay ID</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for delay in delays %}
+                                        <tr>
+                                            <td>{{ delay.date.date() }}</td>
+                                            <td>{{ delay.reason }}</td>
+                                            <td>{{ delay.hours }}</td>
+                                            <td>{{ delay.worker_name }}</td>
+                                            <td>{{ delay.delay_id}}</td>
+
+                                            <td>
+                                                <a href="/delete-delay/{{ delay.delay_id }}">Delete</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -25,63 +25,60 @@
                             <label for="unreserved" class="col-form-label">Unreserved</label>
                             <input type="number" name="unreserved" id="unreserved" min="0" step="1">
                             <label for="reserved" class="col-form-label">Reserved</label>
-                            <input type="number" name="reserved" id="reserved"  min="0" step="1">
+                            <input type="number" name="reserved" id="reserved" min="0" step="1">
                             <label for="ordered" class="col-form-label">Ordered</label>
                             <input type="number" name="ordered" id="ordered" min="0" step="1">
                             <input id="submitItem" value="Add Item" class="btn btn-primary">
-                            
+
                         </form>
                     </div>
                 </div>
                 <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
-                    Items Table
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        {% if items|length < 1 %}
-                        <h4>There are no Items, add one above</h4>
-                        {% else %}
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Item Name</th>
-                                    <th>Unreserved</th>
-                                    <th>Reserved</th>
-                                    <th>Ordered</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>Item Name</th>
-                                    <th>Unreserved</th>
-                                    <th>Reserved</th>
-                                    <th>Ordered</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                {% for item in items %}
-                                <tr>
-                                    <td>{{ item.item_name }}</td>
-                                    <td>{{ item.unreserved }}</td>
-                                    <td>{{ item.reserved }}</td>
-                                    <td>{{ item.ordered }}</td>
+                    <div class="card-header">
+                        <i class="fas fa-table mr-1"></i>
+                        Items Table
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            {% if items|length < 1 %} <h4>There are no Items, add one above</h4>
+                                {% else %}
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Unreserved</th>
+                                            <th>Reserved</th>
+                                            <th>Ordered</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Unreserved</th>
+                                            <th>Reserved</th>
+                                            <th>Ordered</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for item in items %}
+                                        <tr>
+                                            <td>{{ item.item_name }}</td>
+                                            <td>{{ item.unreserved }}</td>
+                                            <td>{{ item.reserved }}</td>
+                                            <td>{{ item.ordered }}</td>
 
-                                    <td>
-                                        <a href="/delete-product/{{ item.item_name }}">Delete</a>
-                                        <br>
-                                        <a href="/update-product/{{ item.item_name }}">Update</a>  
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
-                </div>
-            </div>
+                                            <td>
+                                                <a href="/delete-item/{{ item.item_name }}">Delete</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
