@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Inventory Managmnet App</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Bikes</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">Bikes</div>
+            <div class="card-body">
+                <div class="card mb-4">
+                    <div class="card-header">New Bike</div>
+                    <div class="card-body">
+                        <form action="/bikes/" method="POST" id="bike_form">
+                            <label for="bike_name" class="col-form-label">Bike Name</label>
+                            <input type="text" name="bike_name" id="bike_name">
+                            <label for="description" class="col-form-label">Bike Description</label>
+                            <input type="text" name="description" id="description">
+                            <label for="due" class="col-form-label">Due Date</label>
+                            <input type="date" name="due" id="due">
+                            <input id="submitBike" value="Add Bike" class="btn btn-primary">
+                            
+                        </form>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Bikes Table
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        {% if bikes|length < 1 %}
+                        <h4>There are no Bikes, add one above</h4>
+                        {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Bike Name</th>
+                                    <th>Description</th>
+                                    <th>Due Date</th>
+
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <th>Bike Name</th>
+                                <th>Description</th>
+                                <th>Due Date</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for bike in bikes %}
+                                <tr>
+                                    <td>{{ bike.bike_name }}</td>
+                                    <td>{{ bike.description }}</td>
+                                    <td>{{ bike.due.date() }}</td>
+
+                                    <td>
+                                        <a href="/delete-bike/{{ bike.bike_name }}">Delete</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

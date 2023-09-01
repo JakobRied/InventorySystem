@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Bushbike Inventory System</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container-fluid">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">Items</div>
+            <div class="card-body">
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Items Table
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        {% if items|length < 1 %}
+                        <h4>There are no Items, add one above</h4>
+                        {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Unreserved</th>
+                                    <th>Reserved</th>
+                                    <th>Ordered</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Unreserved</th>
+                                    <th>Reserved</th>
+                                    <th>Ordered</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for item in items %}
+                                <tr>
+                                    <td>{{ item.item_name }}</td>
+                                    <td>{{ item.unreserved }}</td>
+                                    <td>{{ item.reserved }}</td>
+                                    <td>{{ item.ordered }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">Bikes</div>
+            <div class="card-body">
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Bikes Table
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        {% if bikes|length < 1 %}
+                        <h4>There are no Bikes, add one above</h4>
+                        {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Bike Name</th>
+                                    <th>Description</th>
+                                    <th>Due-Day</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Bike Name</th>
+                                    <th>Description</th>
+                                    <th>Due-Day</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for bike in bikes %}
+                                <tr>
+                                    <td>{{ bike.bike_name }}</td>
+                                    <td>{{ bike.description }}</td>
+                                    <td>{{ bike.due.date() }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Delays</div>
+            <div class="card-body">
+                <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    Delays Table
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        {% if delays|length < 1 %}
+                        <h4>There are no Delays, add one above</h4>
+                        {% else %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Delay ID</th>
+                                    <th>Hours</th>
+                                    <th>Reason</th>
+                                    <th>Worker</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Hours</th>
+                                    <th>Reason</th>
+                                    <th>Worker</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                {% for delay in delays %}
+                                <tr>
+                                    <td>{{ delay.day.date() }}</td>
+                                    <td>{{ delay.hours }}</td>
+                                    <td>{{ delay.reason }}</td>
+                                    <td>{{ delay.worker_name }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                </div>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
